@@ -45,11 +45,11 @@ grpcurl -plaintext -proto protos/model.proto localhost:50050 mlservice.v1.Predic
 #    и перезапуск Docker Compose
 docker-compose up -d --force-recreate
 
-# 6. Проверка версии
+# 5. Проверка версии
 grpcurl -plaintext -proto protos/model.proto localhost:50050 mlservice.v1.PredictionService.Health
 # должен вернуть "modelVersion": "v1.1.0"
 
-# 7. Для отката - nginx.conf: proxy_pass grpc_green; -> proxy_pass grpc_blue;
+# 6. Для отката - nginx.conf: proxy_pass grpc_green; -> proxy_pass grpc_blue;
 #    и перезапуск Docker Compose
 docker-compose up -d --force-recreate
 ```
@@ -58,10 +58,10 @@ docker-compose up -d --force-recreate
 
 В данном репозитории используются GitHub Actions для автоматического развертывания сервиса в Google Cloud Run:
 
-    **Триггер:** push в ветку main
-    **Сборка:** создаётся Docker-образ и публикуется в GitHub Container Registry (GHCR)
-    **Деплой:** образ разворачивается в облачный сервис GCP Cloud Run
-    **Проверка:** после деплоя автоматически выполняется health-check по эндпоинту /health — сервис должен ответить статусом 200 OK
+**Триггер:** push в ветку main
+**Сборка:** создаётся Docker-образ и публикуется в GitHub Container Registry (GHCR)
+**Деплой:** образ разворачивается в облачный сервис GCP Cloud Run
+**Проверка:** после деплоя автоматически выполняется health-check по эндпоинту /health — сервис должен ответить статусом 200 OK
 
 ## Тестирование эндпоинтов
 
