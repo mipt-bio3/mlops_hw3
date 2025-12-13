@@ -84,4 +84,8 @@ jobs:
         run: |
           sleep 10
           response=$(grpcurl -plaintext -proto protos/model.proto localhost:50050 mlservice.v1.PredictionService.Health)
-          echo "$
+          echo "$response" | grep -q '"modelVersion": "v1.0.0"'
+
+      - name: Stop and clean up
+        if: always()
+        run: docker-compose down
