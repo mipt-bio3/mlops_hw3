@@ -64,7 +64,7 @@ jobs:
       - name: Switch to Green
         run: |
           sed -i 's/proxy_pass grpc_blue;/proxy_pass grpc_green;/' nginx.conf
-          docker-compose up -d --force-recreate
+          docker compose up -d --force-recreate
 
       - name: Wait after switch
         run: sleep 10
@@ -78,7 +78,7 @@ jobs:
       - name: Rollback to Blue
         run: |
           sed -i 's/proxy_pass grpc_green;/proxy_pass grpc_blue;/' nginx.conf
-          docker-compose up -d --force-recreate
+          docker compose up -d --force-recreate
 
       - name: Final health check after rollback
         run: |
