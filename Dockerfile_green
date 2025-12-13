@@ -1,0 +1,23 @@
+FROM python:3.14-slim
+
+WORKDIR /app
+
+ENV PORT=50051
+ENV MODEL_PATH=/app/models/model_v1.1.0.pkl
+ENV MODEL_VERSION=v1.1.0
+ENV PYTHONUNBUFFERED=1
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+RUN python -m grpc_tools.protoc \
+    -I./protos \
+    --python_out=. \
+    --grpc_python_out=. \
+    ./protos/model.proto
+
+EXPOSE 50051
+
+CMD ["python", "-m", "server.server"]

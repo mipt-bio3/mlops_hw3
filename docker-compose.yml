@@ -1,0 +1,26 @@
+services:
+  ml-blue:
+    image: grpc-ml-service:v1.0.0
+    expose:
+      - "50051"
+    networks:
+      - ml-net
+
+  ml-green:
+    image: grpc-ml-service:v1.1.0
+    expose:
+      - "50051"
+    networks:
+      - ml-net
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "50050:50050"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:Z,ro
+    networks:
+      - ml-net
+
+networks:
+  ml-net:
