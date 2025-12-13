@@ -59,7 +59,7 @@ jobs:
         run: |
           response=$(grpcurl -plaintext -proto protos/model.proto localhost:50050 mlservice.v1.PredictionService.Health)
           echo "Response: $response"
-          echo "$response" | grep -q '"modelVersion":"v1.0.0"'
+          echo "$response" | grep -q '"modelVersion": "v1.0.0"'
 
       - name: Switch to Green
         run: |
@@ -73,7 +73,7 @@ jobs:
         run: |
           response=$(grpcurl -plaintext -proto protos/model.proto localhost:50050 mlservice.v1.PredictionService.Health)
           echo "Response: $response"
-          echo "$response" | grep -q '"modelVersion":"v1.1.0"'
+          echo "$response" | grep -q '"modelVersion": "v1.1.0"'
 
       - name: Rollback to Blue
         run: |
