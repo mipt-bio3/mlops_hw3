@@ -1,13 +1,13 @@
 services:
   ml-blue:
-    image: grpc-ml-service:v1.0.0
+    image: grpc-ml-service:blue
     expose:
       - "50051"
     networks:
       - ml-net
 
   ml-green:
-    image: grpc-ml-service:v1.1.0
+    image: grpc-ml-service:green
     expose:
       - "50051"
     networks:
