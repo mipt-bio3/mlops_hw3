@@ -58,7 +58,7 @@ docker-compose up -d --force-recreate
 
 В данном репозитории используются GitHub Actions.
 
-1) Local Blue-Green gRPC ML Service Deployment - для локальной проверки Blue-Green стратегии
+1. **Local Blue-Green gRPC ML Service Deployment** - для локальной проверки Blue-Green стратегии
 
 **Триггер:** push или pull request в ветку `main`
 
@@ -75,15 +75,19 @@ docker-compose up -d --force-recreate
 — после каждого этапа (старт, переключение, откат) выполняется gRPC-запрос к эндпоинту `Health` через Nginx (порт 50050)  
 — проверяется корректность версии модели в ответе: `"v1.0.0"` для blue и `"v1.1.0"` для green
 
-3) Deploy to GCP Cloud Run - для автоматического развертывания сервиса в Google Cloud Run:
+2. **Deploy to GCP Cloud Run** - для автоматического развертывания сервиса в Google Cloud Run:
 
-**Триггер:** push в ветку main
+**Триггер:**  
+— push в ветку main
 
-**Сборка:** создаётся Docker-образ и публикуется в GitHub Container Registry (GHCR)
+**Сборка:**  
+— создаётся Docker-образ и публикуется в GitHub Container Registry (GHCR)
 
-**Деплой:** образ разворачивается в облачный сервис GCP Cloud Run
+**Деплой:**  
+— образ разворачивается в облачный сервис GCP Cloud Run
 
-**Проверка:** после деплоя автоматически выполняется health-check по эндпоинту /health — сервис должен ответить статусом 200 OK
+**Проверка:**  
+— после деплоя автоматически выполняется health-check по эндпоинту /health — сервис должен ответить статусом 200 OK
 
 ## Тестирование эндпоинтов
 
